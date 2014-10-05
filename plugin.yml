@@ -1,0 +1,25 @@
+name: Locater
+main: location.location
+version: 1.2
+commands:
+  location:
+    description: Used to interact with the Locater plugin
+    usage: /location <argument> [player]
+  locget:
+    description: Shortcut to /location get <player>
+    usage: /locget <player>
+  locreq:
+    description: Shortcut to /location request <player>
+    usage: /locreq <player>
+  loctell:
+    description: Shortcut to /location tell <player>
+    usage: /loctell <player>
+  locbroad:
+    description: Shortcut to /location broadcast [player]
+    usage: /locbroad [player]
+  locme:
+    description: Shortcut to /location me
+    usage: /locme
+  lochelp:
+    description: Shortcut to /location help
+    usage: /lochelp
