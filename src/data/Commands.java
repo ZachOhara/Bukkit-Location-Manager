@@ -1,6 +1,6 @@
-package chezburgr.location.data;
+package data;
 
-import chezburgr.location.dataform.CommandProperties;
+import dataform.CommandProperties;
 
 public interface Commands {
 

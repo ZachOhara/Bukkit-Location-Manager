@@ -1,6 +1,6 @@
-package chezburgr.location.data;
+package data;
 
-import chezburgr.location.dataform.CommandInstance;
+import dataform.CommandInstance;
 
 public class PlayerCommands {
 

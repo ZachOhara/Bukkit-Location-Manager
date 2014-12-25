@@ -1,4 +1,4 @@
-package chezburgr.location.dataform;
+package dataform;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;

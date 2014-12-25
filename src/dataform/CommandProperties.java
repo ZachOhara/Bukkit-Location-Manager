@@ -1,4 +1,4 @@
-package chezburgr.location.dataform;
+package dataform;
 
 public class CommandProperties {
 

@@ -1,4 +1,4 @@
-package chezburgr.location.data;
+package data;
 
 public class ConsoleCommands extends PlayerCommands {
 

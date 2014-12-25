@@ -1,4 +1,4 @@
-package chezburgr.location.main;
+package main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,11 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import chezburgr.location.data.Commands;
-import chezburgr.location.data.ConsoleCommands;
-import chezburgr.location.data.PlayerCommands;
-import chezburgr.location.dataform.CommandInstance;
-import chezburgr.location.dataform.CommandProperties;
+import data.Commands;
+import data.ConsoleCommands;
+import data.PlayerCommands;
+import dataform.CommandInstance;
+import dataform.CommandProperties;
 
 public class Main extends JavaPlugin{
 
