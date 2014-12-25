@@ -12,33 +12,32 @@ import data.PlayerCommands;
 import dataform.CommandInstance;
 import dataform.CommandProperties;
 
-public class Main extends JavaPlugin{
+public class Main extends JavaPlugin {
 
 	public static Main plugin;
 	
-	@Override
 	public void onLoad() {
 		// Get all player locations and store them
 	}
 	
 	public int prepare(CommandInstance instance, CommandProperties properties) {
 		if ((properties.useTarget && properties.targetRequired) && !instance.targetGiven) {
-			instance.sender.sendMessage(ChatColor.RED + "Not enough arguments");
+			instance.error("Not enough arguments");
 			return 0;
 		} else if (!properties.useTarget && instance.targetGiven) {
-			instance.sender.sendMessage(ChatColor.RED + "Too many arguments");
+			instance.error("Too many arguments");
 			return 0;
 		}
 		if (properties.opsOnly && !instance.fromConsole && instance.senderPl.isOp()) {
-			instance.sender.sendMessage(ChatColor.RED + "You must be an OP to use this command");
+			instance.error("You must be an OP to use this command");
 			return 1;
 		}
 		if (!properties.allowConsole && instance.fromConsole) {
-			instance.sender.sendMessage(ChatColor.RED + "You cannot use this command from the console");
+			instance.error("You cannot use this command from the console");
 			return 1;
 		}
 		if (!properties.allowOffineTarget && !instance.targetOnline) {
-			instance.sender.sendMessage(ChatColor.WHITE + instance.targetName + ChatColor.RED + " either does not exist or is not online");
+			instance.targetError(" either does not exist or is not online");
 			return 1;
 		}
 		return 2;
@@ -48,6 +47,8 @@ public class Main extends JavaPlugin{
 	public boolean onCommand(CommandSender rawSender, Command rawCommand, String commandLabel, String[] args) {
 		
 		String commandStr = getOperation(rawSender, rawCommand, args);
+		if (commandStr == null)
+			return false;
 		
 		CommandInstance instance;
 		
@@ -195,6 +196,7 @@ public class Main extends JavaPlugin{
 		default:
 			rawSender.sendMessage("A fatal error has occurred");
 			commandStr = "error";
+			break;
 		case "location":
 			switch(args[0].toLowerCase()) {
 			case "g":

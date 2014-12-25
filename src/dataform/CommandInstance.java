@@ -1,5 +1,6 @@
 package dataform;
 
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -41,8 +42,16 @@ public class CommandInstance {
 		}
 		this.command = command;
 		this.targetName = "";
-		this.targetOnline = false;
-		
+		this.targetOnline = false;	
+	}
+	
+	// A shortcut to reporting error messages
+	public void error(String message) {
+		this.sender.sendMessage(ChatColor.RED + message);
+	}
+	
+	public void targetError(String message) {
+		this.sender.sendMessage(ChatColor.WHITE + this.targetName + ChatColor.RED + message);
 	}
 
 }
