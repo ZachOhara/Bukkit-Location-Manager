@@ -17,7 +17,7 @@ public class Main extends JavaPlugin {
 	public static Main plugin;
 	
 	public void onLoad() {
-		// Get all player locations and store them
+		// TODO: Get all player locations and store them
 	}
 	
 	public int prepare(CommandInstance instance, CommandProperties properties) {
