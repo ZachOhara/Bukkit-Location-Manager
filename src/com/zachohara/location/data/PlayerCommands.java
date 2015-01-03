@@ -1,6 +1,6 @@
-package data;
+package com.zachohara.location.data;
 
-import dataform.CommandInstance;
+import com.zachohara.location.dataform.CommandInstance;
 
 public class PlayerCommands {
 

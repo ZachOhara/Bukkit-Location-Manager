@@ -1,4 +1,4 @@
-package main;
+package com.zachohara.location.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,11 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import data.Commands;
-import data.ConsoleCommands;
-import data.PlayerCommands;
-import dataform.CommandInstance;
-import dataform.CommandProperties;
+import com.zachohara.location.data.Commands;
+import com.zachohara.location.data.ConsoleCommands;
+import com.zachohara.location.data.PlayerCommands;
+import com.zachohara.location.dataform.CommandInstance;
+import com.zachohara.location.dataform.CommandProperties;
 
 public class Main extends JavaPlugin {
 

@@ -1,4 +1,4 @@
-package dataform;
+package com.zachohara.location.dataform;
 
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

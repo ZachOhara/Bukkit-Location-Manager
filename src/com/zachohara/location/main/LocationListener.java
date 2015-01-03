@@ -1,4 +1,4 @@
-package main;
+package com.zachohara.location.main;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

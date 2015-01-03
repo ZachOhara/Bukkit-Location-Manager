@@ -1,4 +1,4 @@
-package dataform;
+package com.zachohara.location.dataform;
 
 public class CommandProperties {
 

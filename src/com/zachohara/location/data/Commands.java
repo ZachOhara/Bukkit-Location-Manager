@@ -1,6 +1,6 @@
-package data;
+package com.zachohara.location.data;
 
-import dataform.CommandProperties;
+import com.zachohara.location.dataform.CommandProperties;
 
 public interface Commands {
 

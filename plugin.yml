@@ -1,6 +1,6 @@
 name: Locater
-main: location.location
-version: 1.2
+main: com.zachohara.location.main.Main
+version: 1.2.1
 commands:
   location:
     description: Used to interact with the Locater plugin
