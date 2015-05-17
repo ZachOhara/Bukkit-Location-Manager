@@ -1,5 +1,5 @@
-/* CommandInstance.java | Represents some details or conditions for
- * a single invocation of any command.
+/* ConsoleCommands.java | Implementations of all the added commands
+ * as they may be sent by a server console controlling the game.
  * Copyright (C) 2014 Zach Ohara
  *
  * This file is part of the Chezburgr's Location Manager plugin for Bukkit
