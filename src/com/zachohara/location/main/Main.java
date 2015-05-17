@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.zachohara.location.main;
 
@@ -34,11 +34,11 @@ import com.zachohara.location.dataform.CommandProperties;
 public class Main extends JavaPlugin {
 
 	public static Main plugin;
-	
+
 	public void onLoad() {
 		// TODO: Get all player locations and store them
 	}
-	
+
 	public int prepare(CommandInstance instance, CommandProperties properties) {
 		if ((properties.useTarget && properties.targetRequired) && !instance.targetGiven) {
 			instance.error("Not enough arguments");
@@ -61,18 +61,18 @@ public class Main extends JavaPlugin {
 		}
 		return 2;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender rawSender, Command rawCommand, String commandLabel, String[] args) {
-		
+
 		String commandStr = getOperation(rawSender, rawCommand, args);
 		if (commandStr == null)
 			return false;
-		
+
 		CommandInstance instance;
-		
+
 		//find the target player
-		
+
 		if (rawCommand.getName().equalsIgnoreCase("location")) {
 			if (args.length == 2) {
 				instance = new CommandInstance(rawSender, commandStr, Bukkit.getOfflinePlayer(args[1]));
@@ -95,7 +95,7 @@ public class Main extends JavaPlugin {
 				return false;
 			}
 		}
-		
+
 		if (instance.command.equals("get")) {
 			int result = prepare(instance, Commands.GET);
 			if (result == 0) {
@@ -110,7 +110,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (instance.command.equals("request")) {
 			int result = prepare(instance, Commands.REQUEST);
 			if (result == 0) {
@@ -125,7 +125,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (instance.command.equals("tell")) {
 			int result = prepare(instance, Commands.TELL);
 			if (result == 0) {
@@ -140,7 +140,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (instance.command.equals("broadcast")) {
 			int result = prepare(instance, Commands.BROADCAST);
 			if (result == 0) {
@@ -155,7 +155,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (instance.command.equals("me")) {
 			int result = prepare(instance, Commands.ME);
 			if (result == 0) {
@@ -170,7 +170,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		if (instance.command.equals("help")) {
 			int result = prepare(instance, Commands.HELP);
 			if (result == 0) {
@@ -185,14 +185,14 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
-		
+
 		return true;		
 	}
-	
+
 	public String getOperation(CommandSender rawSender, Command rawCommand, String[] args) {
-		
+
 		String commandStr;
-		
+
 		switch(rawCommand.getName().toLowerCase()) {
 		case "locget": 
 			commandStr = "get";

@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.zachohara.location.data;
 
@@ -31,5 +31,5 @@ public interface Commands {
 	public CommandProperties BROADCAST = new CommandProperties(true, false, true, true, false);
 	public CommandProperties ME = new CommandProperties(false, false, false, false, false);
 	public CommandProperties HELP = new CommandProperties(false, false, true, false, false);
-	
+
 }

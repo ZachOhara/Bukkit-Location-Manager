@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.zachohara.location.main;
 
@@ -32,7 +32,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LocationListener extends JavaPlugin implements Listener {
-	
+
 	public LocationListener(JavaPlugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
@@ -41,26 +41,26 @@ public class LocationListener extends JavaPlugin implements Listener {
 	public void PlayerQuit(PlayerQuitEvent event) {
 		storeLocation(event);
 	}
-	
+
 	@EventHandler
 	public void PlayerKick(PlayerKickEvent event) {
 		storeLocation(event);
 	}
-	
+
 	@EventHandler
 	public void PlayerJoin(PlayerJoinEvent event) {
 		storeLocation(event);
 	}
-	
+
 	@EventHandler
 	public void PlayerMove(PlayerMoveEvent event) {
 		storeLocation(event);
 	}
-	
+
 	public void storeLocation(PlayerEvent event) {
 		storeLocation(event.getPlayer());
 	}
-	
+
 	public void storeLocation(Player player) {
 		Location loc = player.getLocation();
 		int[] coords = { loc.getBlockX(),

@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.zachohara.location.dataform;
 
@@ -27,7 +27,7 @@ public class CommandProperties {
 	public boolean allowConsole;
 	public boolean allowOffineTarget;
 	public boolean targetRequired;
-	
+
 	public CommandProperties(boolean useTarget, boolean opsOnly, boolean allowConsole, boolean allowOfflineTarget, boolean targetRequired) {
 		this.useTarget = useTarget;
 		this.opsOnly = opsOnly;
@@ -35,5 +35,5 @@ public class CommandProperties {
 		this.allowOffineTarget = allowOfflineTarget;
 		this.targetRequired = targetRequired;
 	}
-	
+
 }

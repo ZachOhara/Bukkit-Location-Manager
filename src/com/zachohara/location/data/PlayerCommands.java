@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.zachohara.location.data;
 
@@ -27,23 +27,23 @@ public class PlayerCommands {
 	public static boolean get(CommandInstance instance) {
 		return true;
 	}
-	
+
 	public static boolean request(CommandInstance instance) {
 		return true;
 	}
-	
+
 	public static boolean tell(CommandInstance instance) {
 		return true;
 	}
-	
+
 	public static boolean broadcast(CommandInstance instance) {
 		return true;
 	}
-	
+
 	public static boolean me(CommandInstance instance) {
 		return true;
 	}
-	
+
 	public static boolean help(CommandInstance instance) {
 		return true;
 	}
