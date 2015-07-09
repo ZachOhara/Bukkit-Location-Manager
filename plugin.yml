@@ -1,25 +1,28 @@
-name: Locater
-main: com.zachohara.location.main.Main
-version: 1.2.1
+name: LocationManager
+version: 2.1.6
+main: io.github.zachohara.bukkit.location.plugin.Main
+depend: [BukkitCommon]
+prefix: Location Manager
+description: Location management tools
+author: Zach Ohara
 commands:
-  location:
-    description: Used to interact with the Locater plugin
-    usage: /location <argument> [player]
-  locget:
-    description: Shortcut to /location get <player>
-    usage: /locget <player>
-  locreq:
-    description: Shortcut to /location request <player>
-    usage: /locreq <player>
-  loctell:
-    description: Shortcut to /location tell <player>
-    usage: /loctell <player>
-  locbroad:
-    description: Shortcut to /location broadcast [player]
-    usage: /locbroad [player]
-  locme:
-    description: Shortcut to /location me
-    usage: /locme
-  lochelp:
-    description: Shortcut to /location help
-    usage: /lochelp
+  getlocation:
+    description: Get the location of another player
+    usage: /getlocation <player>
+    aliases: [getloc, gl]
+  requestlocation:
+    description: Request the location of another player
+    usage: /requestlocation <player>
+    aliases: [requestloc, reqloc, rl]
+  telllocation:
+    description: Tell your location to another player
+    usage: /telllocation <player>
+    aliases: [tellloc, tl]
+  broadcastlocation:
+    description: Brodcast the location of yourself or another player
+    usage: /broadcastlocation [player]
+    aliases: [broadcastloc, broadloc, bl]
+  mylocation:
+    description: Find out your own location
+    usage: /mylocation
+    aliases: [myloc, ml]
