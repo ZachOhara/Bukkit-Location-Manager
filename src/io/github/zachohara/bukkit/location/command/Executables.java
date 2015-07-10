@@ -23,8 +23,9 @@ import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.Implementation;
 import io.github.zachohara.bukkit.common.util.StringUtil;
-import io.github.zachohara.bukkit.location.plugin.LocationListener;
-import io.github.zachohara.bukkit.location.plugin.LocationRequestHistory;
+import io.github.zachohara.bukkit.location.locdata.LocationDataManager;
+import io.github.zachohara.bukkit.location.locdata.LocationRequestHistory;
+import io.github.zachohara.bukkit.location.plugin.Main;
 
 public enum Executables implements CommandExecutables {
 	
@@ -54,11 +55,11 @@ public enum Executables implements CommandExecutables {
 
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationListener activeListener = LocationListener.getActiveListener();
+			LocationDataManager activeManager = Main.getLocationData();
 			if (instance.hasTarget()) {
 				instance.sendMessage("%t is at position %tloc");
-			} else if (LocationListener.getActiveListener().playerLocationExists(instance.getGivenTarget())) {
-				Location targetLoc = activeListener.retrieveLocation(instance.getGivenTarget());
+			} else if (activeManager.playerLocationExists(instance.getGivenTarget())) {
+				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is " + locString);
 			} else {
@@ -80,8 +81,8 @@ public enum Executables implements CommandExecutables {
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("%t has been informed of your request\n"
 					+ "%t may now send you their location");
-			instance.sendMessage("%s has requested your location\n"
-					+ "Use @name/telllocation@text or @name/tellloc@text to tell %s your location.");
+			instance.sendTargetMessage("%s has requested your location\n"
+					+ "Use @name/telllocation@text or @name/tellloc@text to tell %s your location");
 			LocationRequestHistory.registerRequest(instance);
 			return true;
 		}
@@ -101,7 +102,7 @@ public enum Executables implements CommandExecutables {
 				instance.sendTargetMessage("%s is currently at %sloc");
 				instance.sendMessage("%t has been informed of your location");
 			} else {
-				Player returnTo = LocationRequestHistory.getMostRecentRequest(instance.getTargetPlayer());
+				Player returnTo = LocationRequestHistory.getMostRecentRequest(instance.getSenderPlayer());
 				if (returnTo != null) {
 					instance.sendMessage("@name " + returnTo.getName() + "@text has been informed of your location") ;
 					returnTo.sendMessage(StringUtil.parseString("%s is currently at %sloc", instance));
@@ -123,11 +124,13 @@ public enum Executables implements CommandExecutables {
 
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationListener activeListener = LocationListener.getActiveListener();
+			LocationDataManager activeManager = Main.getLocationData();
 			if (instance.getArguments().length == 0)
 				instance.broadcastMessage("%s is currently at position %sloc");
-			else if (activeListener.playerLocationExists(instance.getGivenTarget())) {
-				Location targetLoc = activeListener.retrieveLocation(instance.getGivenTarget());
+			else if (instance.hasTarget()) {
+				instance.broadcastMessage("%t is currently at %tloc");
+			} else if (activeManager.playerLocationExists(instance.getGivenTarget())) {
+				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is " + locString);
 			}
