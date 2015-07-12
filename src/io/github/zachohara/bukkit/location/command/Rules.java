@@ -19,20 +19,35 @@ package io.github.zachohara.bukkit.location.command;
 import io.github.zachohara.bukkit.common.command.CommandRules;
 import io.github.zachohara.bukkit.common.command.CommandRulesEntry;
 
+/**
+ * The {@code Rules} interface represents the set of commands supported by this
+ * plugin, and contains a {@code CommandRulesEntry} for each command, which defines
+ * information about the expected context of the command.
+ * 
+ * @author Zach Ohara
+ */
 public enum Rules implements CommandRules {
-	
+
 	GET(new CommandRulesEntry("getlocation", 1, 1, Source.OP_ONLY, Target.ALLOW_OFFLINE)),
 	REQUEST(new CommandRulesEntry("requestlocation", 1, 1, Source.ALL, Target.ALL_ONLINE)),
 	TELL(new CommandRulesEntry("telllocation", 0, 1, Source.PLAYER_ONLY, Target.ALL_ONLINE)),
 	BROADCAST (new CommandRulesEntry("broadcastlocation", 0, 1, Source.ALL, Target.ALLOW_OFFLINE)),
 	ME(new CommandRulesEntry("mylocation", 0, 0, Source.PLAYER_ONLY, Target.NONE));
-	
+
+	/**
+	 * The {@code CommandRulesEntry} associated with this command.
+	 */
 	private CommandRulesEntry rulesEntry;
-	
+
+	/**
+	 * Constructs a new {@code Rules} object with the given {@code CommandRulesEntry}.
+	 * 
+	 * @param rules the {@code CommandRulesEntry} for this command.
+	 */
 	private Rules(CommandRulesEntry rules) {
 		this.rulesEntry = rules;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

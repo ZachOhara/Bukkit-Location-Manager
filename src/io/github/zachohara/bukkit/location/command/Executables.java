@@ -27,32 +27,60 @@ import io.github.zachohara.bukkit.location.locdata.LocationDataManager;
 import io.github.zachohara.bukkit.location.locdata.LocationRequestHistory;
 import io.github.zachohara.bukkit.location.plugin.Main;
 
+/**
+ * The {@code Executables} interface represents the set of commands supported by this
+ * plugin, and contains an executable object for each command that acts as the main
+ * procedure for the command.
+ * 
+ * @author Zach Ohara
+ */
 public enum Executables implements CommandExecutables {
-	
+
 	GET(new Get()),
 	REQUEST(new Request()),
 	TELL(new Tell()),
 	BROADCAST(new Broadcast()),
 	ME(new Me());
-	
+
+	/**
+	 * The subclass of {@code Implementation} that contains an implementation for the
+	 * command
+	 */
 	private Implementation implement;
-	
+
+	/**
+	 * Constructs a new constant with the given implementation.
+	 * 
+	 * @param implement the implementation of the command.
+	 */
 	private Executables(Implementation implement) {
 		this.implement = implement;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Implementation getImplementation() {
 		return this.implement;
 	}
-	
+
+	/**
+	 * The implementation for the 'getlocation' command.
+	 */
 	private static class Get extends Implementation {
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getName() {
 			return "getlocation";
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataManager activeManager = Main.getLocationData();
@@ -67,16 +95,25 @@ public enum Executables implements CommandExecutables {
 			}
 			return true;
 		}
-		
+
 	}
-	
+
+	/**
+	 * The implementation for the 'requestlocation' command.
+	 */
 	private static class Request extends Implementation {
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getName() {
 			return "requestlocation";
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("%t has been informed of your request\n"
@@ -86,16 +123,25 @@ public enum Executables implements CommandExecutables {
 			LocationRequestHistory.registerRequest(instance);
 			return true;
 		}
-		
+
 	}
-	
+
+	/**
+	 * The implementation for the 'telllocation' command.
+	 */
 	private static class Tell extends Implementation {
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getName() {
 			return "telllocation";
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			if (instance.hasTarget()) {
@@ -112,16 +158,25 @@ public enum Executables implements CommandExecutables {
 			}
 			return true;
 		}
-		
+
 	}
-	
+
+	/**
+	 * The implementation for the 'broadcastlocation' command.
+	 */
 	private static class Broadcast extends Implementation {
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getName() {
 			return "broadcastlocation";
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataManager activeManager = Main.getLocationData();
@@ -138,7 +193,10 @@ public enum Executables implements CommandExecutables {
 				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
 			return true;
 		}
-		
+
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doConsoleCommand(CommandInstance instance) {
 			if (instance.getArguments().length == 0) {
@@ -148,22 +206,31 @@ public enum Executables implements CommandExecutables {
 				return this.doPlayerCommand(instance);
 			}
 		}
-		
+
 	}
-	
+
+	/**
+	 * The implementation for the 'mylocation' command.
+	 */
 	private static class Me extends Implementation {
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getName() {
 			return "mylocation";
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("You are currently at %sloc");
 			return true;
 		}
-		
+
 	}
 
 }

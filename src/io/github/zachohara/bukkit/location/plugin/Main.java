@@ -28,15 +28,24 @@ import io.github.zachohara.bukkit.location.locdata.LocationListener;
 
 import org.bukkit.event.Listener;
 
+/**
+ * The {@code Main} class is the entry point for plugin.
+ * 
+ * @author Zach Ohara
+ */
 public class Main extends CommonPlugin implements Listener {
-	
+
+	/**
+	 * The current {@code LocationDataManager} for this plugin.
+	 */
 	private static LocationDataManager activeManager;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void onEnable() {
+		super.onEnable();
 		activeManager = new LocationDataManager(this);
 		activeManager.saveAllPlayers();
 		this.getServer().getPluginManager().registerEvents(new LocationListener(activeManager), this);
@@ -44,6 +53,7 @@ public class Main extends CommonPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
+		super.onDisable();
 		activeManager.saveAllPlayers();
 		try {
 			activeManager.saveToFile();
@@ -60,7 +70,7 @@ public class Main extends CommonPlugin implements Listener {
 	public Class<? extends CommandRules> getCommandRuleSet() {
 		return Rules.class;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -68,7 +78,7 @@ public class Main extends CommonPlugin implements Listener {
 	public Class<? extends CommandExecutables> getCommandExecutableSet() {
 		return Executables.class;
 	}
-	
+
 	public static LocationDataManager getLocationData() {
 		return activeManager;
 	}
