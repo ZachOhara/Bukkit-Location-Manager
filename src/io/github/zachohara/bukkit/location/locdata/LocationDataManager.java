@@ -125,6 +125,8 @@ public class LocationDataManager {
 	 * into a usable object form.
 	 * 
 	 * @throws IOException if the file read operation fails.
+	 * @throws ClassNotFoundException if the read is succesful, but the content is not
+	 * what was expected.
 	 */
 	@SuppressWarnings("unchecked")
 	public void loadFromFile() throws IOException, ClassNotFoundException {
