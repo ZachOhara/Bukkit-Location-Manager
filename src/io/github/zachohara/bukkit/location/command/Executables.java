@@ -44,7 +44,7 @@ public enum Executables implements CommandExecutables {
 
 	/**
 	 * The subclass of {@code Implementation} that contains an implementation for the
-	 * command
+	 * command.
 	 */
 	private Implementation implement;
 
