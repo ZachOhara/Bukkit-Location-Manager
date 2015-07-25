@@ -35,9 +35,9 @@ public class LocationListener implements Listener {
 
 	/**
 	 * The {@code LocationDataManager} that all events should be reported to.
-	 * @see LocationDataManager
+	 * @see LocationDataMap
 	 */
-	private LocationDataManager manager;
+	private LocationDataMap manager;
 
 	/**
 	 * Constructs a new Listener that will report actions to the given
@@ -45,7 +45,7 @@ public class LocationListener implements Listener {
 	 * 
 	 * @param manager the {@code LocationDataManager} to report actions to.
 	 */
-	public LocationListener(LocationDataManager manager) {
+	public LocationListener(LocationDataMap manager) {
 		this.manager = manager;
 	}
 
@@ -56,7 +56,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		this.manager.savePlayerLocation(e.getPlayer());
+		this.manager.saveKeyedData(e.getPlayer());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		this.manager.savePlayerLocation(e.getPlayer());
+		this.manager.saveKeyedData(e.getPlayer());
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerKick(PlayerKickEvent e) {
-		this.manager.savePlayerLocation(e.getPlayer());
+		this.manager.saveKeyedData(e.getPlayer());
 	}
 
 }

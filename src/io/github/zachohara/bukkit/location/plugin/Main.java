@@ -16,29 +16,25 @@
 
 package io.github.zachohara.bukkit.location.plugin;
 
-import java.io.IOException;
-
 import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandRules;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 import io.github.zachohara.bukkit.location.command.Executables;
 import io.github.zachohara.bukkit.location.command.Rules;
-import io.github.zachohara.bukkit.location.locdata.LocationDataManager;
+import io.github.zachohara.bukkit.location.locdata.LocationDataMap;
 import io.github.zachohara.bukkit.location.locdata.LocationListener;
-
-import org.bukkit.event.Listener;
 
 /**
  * The {@code Main} class is the entry point for plugin.
  * 
  * @author Zach Ohara
  */
-public class Main extends CommonPlugin implements Listener {
+public class Main extends CommonPlugin {
 
 	/**
-	 * The current {@code LocationDataManager} for this plugin.
+	 * The current {@code LocationDataMap} for this plugin.
 	 */
-	private static LocationDataManager activeManager;
+	private static LocationDataMap activeManager;
 
 	/**
 	 * {@inheritDoc}
@@ -46,22 +42,9 @@ public class Main extends CommonPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-		activeManager = new LocationDataManager(this);
-		activeManager.saveAllPlayers();
+		activeManager = new LocationDataMap(this);
 		this.getServer().getPluginManager().registerEvents(new LocationListener(activeManager), this);
 	}
-
-	@Override
-	public void onDisable() {
-		super.onDisable();
-		activeManager.saveAllPlayers();
-		try {
-			activeManager.saveToFile();
-		} catch (IOException e) {
-			this.getLogger().warning("Unable to save offline player location data:");
-			e.printStackTrace();
-		}
-	}	
 
 	/**
 	 * {@inheritDoc}
@@ -79,7 +62,7 @@ public class Main extends CommonPlugin implements Listener {
 		return Executables.class;
 	}
 
-	public static LocationDataManager getLocationData() {
+	public static LocationDataMap getLocationData() {
 		return activeManager;
 	}
 

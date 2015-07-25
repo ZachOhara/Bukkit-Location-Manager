@@ -23,7 +23,7 @@ import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.Implementation;
 import io.github.zachohara.bukkit.common.util.StringUtil;
-import io.github.zachohara.bukkit.location.locdata.LocationDataManager;
+import io.github.zachohara.bukkit.location.locdata.LocationDataMap;
 import io.github.zachohara.bukkit.location.locdata.LocationRequestHistory;
 import io.github.zachohara.bukkit.location.plugin.Main;
 
@@ -83,10 +83,10 @@ public enum Executables implements CommandExecutables {
 		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationDataManager activeManager = Main.getLocationData();
+			LocationDataMap activeManager = Main.getLocationData();
 			if (instance.hasTarget()) {
 				instance.sendMessage("%t is at position %tloc");
-			} else if (activeManager.playerLocationExists(instance.getGivenTarget())) {
+			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
 				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is " + locString);
@@ -179,12 +179,12 @@ public enum Executables implements CommandExecutables {
 		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationDataManager activeManager = Main.getLocationData();
+			LocationDataMap activeManager = Main.getLocationData();
 			if (instance.getArguments().length == 0)
 				instance.broadcastMessage("%s is currently at position %sloc");
 			else if (instance.hasTarget()) {
 				instance.broadcastMessage("%t is currently at %tloc");
-			} else if (activeManager.playerLocationExists(instance.getGivenTarget())) {
+			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
 				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is " + locString);
