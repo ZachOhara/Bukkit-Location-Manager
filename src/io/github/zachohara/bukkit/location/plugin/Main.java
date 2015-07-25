@@ -62,6 +62,11 @@ public class Main extends CommonPlugin {
 		return Executables.class;
 	}
 
+	/**
+	 * Gets the currently active {@code LocationDataMap} for this plugin.
+	 * 
+	 * @return the active {@code LocationDataMap}.
+	 */
 	public static LocationDataMap getLocationData() {
 		return activeManager;
 	}
