@@ -1,6 +1,6 @@
 # Bukkit Location Manager
 
-The Bukkit Location Manager is a plugin for a Bukkit server that adds a few useful tools for accessing and managing the locations of players on the server. It is last confirmed to work on Bukkit version 1.7.9-R2. A full list of commands is included below.
+The Bukkit Location Manager is a plugin for a Bukkit server that adds a few useful tools for accessing and managing the locations of players on the server. It is last confirmed to work on Bukkit version 1.7.9-R2. A full list of commands that this plugin adds is included below.
 
 This plugin uses my Bukkit Common Library. The server *must* have that plugin installed for this plugin to work. The Bukkit Common Library can be downloaded from [GitHub](http://github.com/zachohara/bukkit-common)
 
