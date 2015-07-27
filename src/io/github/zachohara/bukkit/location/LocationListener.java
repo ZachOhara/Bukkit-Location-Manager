@@ -14,7 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.location.locdata;
+package io.github.zachohara.bukkit.location;
+
+import io.github.zachohara.bukkit.location.data.LocationDataMap;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -32,13 +34,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
  * @author Zach Ohara
  */
 public class LocationListener implements Listener {
-
+	
 	/**
 	 * The {@code LocationDataManager} that all events should be reported to.
 	 * @see LocationDataMap
 	 */
 	private LocationDataMap manager;
-
+	
 	/**
 	 * Constructs a new Listener that will report actions to the given
 	 * {@code LocationDataManager}.
@@ -48,7 +50,7 @@ public class LocationListener implements Listener {
 	public LocationListener(LocationDataMap manager) {
 		this.manager = manager;
 	}
-
+	
 	/**
 	 * Saves a player's location whenever the player joins the server.
 	 * 
@@ -58,7 +60,7 @@ public class LocationListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-
+	
 	/**
 	 * Saves a player's location whenever the player leaves the server.
 	 * 
@@ -68,7 +70,7 @@ public class LocationListener implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-
+	
 	/**
 	 * Saves a player's location whenever the player is kicked from the server.
 	 * 
@@ -78,5 +80,5 @@ public class LocationListener implements Listener {
 	public void onPlayerKick(PlayerKickEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-
+	
 }

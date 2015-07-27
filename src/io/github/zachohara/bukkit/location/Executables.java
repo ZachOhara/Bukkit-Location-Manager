@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.location.command;
+package io.github.zachohara.bukkit.location;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -23,9 +23,8 @@ import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.Implementation;
 import io.github.zachohara.bukkit.common.util.StringUtil;
-import io.github.zachohara.bukkit.location.locdata.LocationDataMap;
-import io.github.zachohara.bukkit.location.locdata.LocationRequestHistory;
-import io.github.zachohara.bukkit.location.plugin.Main;
+import io.github.zachohara.bukkit.location.data.LocationDataMap;
+import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
 
 /**
  * The {@code Executables} interface represents the set of commands supported by this
@@ -35,19 +34,19 @@ import io.github.zachohara.bukkit.location.plugin.Main;
  * @author Zach Ohara
  */
 public enum Executables implements CommandExecutables {
-
+	
 	GET(new Get()),
 	REQUEST(new Request()),
 	TELL(new Tell()),
 	BROADCAST(new Broadcast()),
 	ME(new Me());
-
+	
 	/**
 	 * The subclass of {@code Implementation} that contains an implementation for the
 	 * command.
 	 */
 	private Implementation implement;
-
+	
 	/**
 	 * Constructs a new constant with the given implementation.
 	 * 
@@ -56,7 +55,7 @@ public enum Executables implements CommandExecutables {
 	private Executables(Implementation implement) {
 		this.implement = implement;
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -64,12 +63,12 @@ public enum Executables implements CommandExecutables {
 	public Implementation getImplementation() {
 		return this.implement;
 	}
-
+	
 	/**
 	 * The implementation for the 'getlocation' command.
 	 */
 	private static class Get extends Implementation {
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -77,13 +76,13 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "getlocation";
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationDataMap activeManager = Main.getLocationData();
+			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
 			if (instance.hasTarget()) {
 				instance.sendMessage("%t is at position %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
@@ -95,14 +94,14 @@ public enum Executables implements CommandExecutables {
 			}
 			return true;
 		}
-
+		
 	}
-
+	
 	/**
 	 * The implementation for the 'requestlocation' command.
 	 */
 	private static class Request extends Implementation {
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -110,7 +109,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "requestlocation";
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -123,14 +122,14 @@ public enum Executables implements CommandExecutables {
 			LocationRequestHistory.registerRequest(instance);
 			return true;
 		}
-
+		
 	}
-
+	
 	/**
 	 * The implementation for the 'telllocation' command.
 	 */
 	private static class Tell extends Implementation {
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -138,7 +137,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "telllocation";
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -158,14 +157,14 @@ public enum Executables implements CommandExecutables {
 			}
 			return true;
 		}
-
+		
 	}
-
+	
 	/**
 	 * The implementation for the 'broadcastlocation' command.
 	 */
 	private static class Broadcast extends Implementation {
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -173,13 +172,13 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "broadcastlocation";
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
-			LocationDataMap activeManager = Main.getLocationData();
+			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
 			if (instance.getArguments().length == 0)
 				instance.broadcastMessage("%s is currently at position %sloc");
 			else if (instance.hasTarget()) {
@@ -193,7 +192,7 @@ public enum Executables implements CommandExecutables {
 				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
 			return true;
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -206,14 +205,14 @@ public enum Executables implements CommandExecutables {
 				return this.doPlayerCommand(instance);
 			}
 		}
-
+		
 	}
-
+	
 	/**
 	 * The implementation for the 'mylocation' command.
 	 */
 	private static class Me extends Implementation {
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -221,7 +220,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "mylocation";
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -230,7 +229,7 @@ public enum Executables implements CommandExecutables {
 			instance.sendMessage("You are currently at %sloc");
 			return true;
 		}
-
+		
 	}
-
+	
 }

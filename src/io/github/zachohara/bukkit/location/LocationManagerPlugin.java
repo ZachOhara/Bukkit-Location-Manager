@@ -14,22 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.location.plugin;
+package io.github.zachohara.bukkit.location;
 
 import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandRules;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
-import io.github.zachohara.bukkit.location.command.Executables;
-import io.github.zachohara.bukkit.location.command.Rules;
-import io.github.zachohara.bukkit.location.locdata.LocationDataMap;
-import io.github.zachohara.bukkit.location.locdata.LocationListener;
+import io.github.zachohara.bukkit.location.data.LocationDataMap;
 
 /**
  * The {@code Main} class is the entry point for plugin.
  * 
  * @author Zach Ohara
  */
-public class Main extends CommonPlugin {
+public class LocationManagerPlugin extends CommonPlugin {
 
 	/**
 	 * The current {@code LocationDataMap} for this plugin.
