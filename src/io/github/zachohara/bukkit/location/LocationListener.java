@@ -30,55 +30,56 @@ import org.bukkit.event.player.PlayerQuitEvent;
  * the connection status of players. Whenever the location status of a player changes
  * (because the player joined, left, was kicked, ect.), the event is forwarded to a
  * {@code LocationDataManager} object, which will save the location of the player.
- * 
+ *
  * @author Zach Ohara
  */
 public class LocationListener implements Listener {
-	
+
 	/**
 	 * The {@code LocationDataManager} that all events should be reported to.
+	 *
 	 * @see LocationDataMap
 	 */
 	private LocationDataMap manager;
-	
+
 	/**
 	 * Constructs a new Listener that will report actions to the given
 	 * {@code LocationDataManager}.
-	 * 
+	 *
 	 * @param manager the {@code LocationDataManager} to report actions to.
 	 */
 	public LocationListener(LocationDataMap manager) {
 		this.manager = manager;
 	}
-	
+
 	/**
 	 * Saves a player's location whenever the player joins the server.
-	 * 
+	 *
 	 * @param e the event that contains a player.
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-	
+
 	/**
 	 * Saves a player's location whenever the player leaves the server.
-	 * 
+	 *
 	 * @param e the event that contains a player.
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-	
+
 	/**
 	 * Saves a player's location whenever the player is kicked from the server.
-	 * 
+	 *
 	 * @param e the event that contains a player.
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerKick(PlayerKickEvent e) {
 		this.manager.saveKeyedData(e.getPlayer());
 	}
-	
+
 }

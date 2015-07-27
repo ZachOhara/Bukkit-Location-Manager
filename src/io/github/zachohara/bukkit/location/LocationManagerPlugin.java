@@ -23,7 +23,7 @@ import io.github.zachohara.bukkit.location.data.LocationDataMap;
 
 /**
  * The {@code Main} class is the entry point for plugin.
- * 
+ *
  * @author Zach Ohara
  */
 public class LocationManagerPlugin extends CommonPlugin {
@@ -39,8 +39,9 @@ public class LocationManagerPlugin extends CommonPlugin {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-		activeManager = new LocationDataMap(this);
-		this.getServer().getPluginManager().registerEvents(new LocationListener(activeManager), this);
+		LocationManagerPlugin.activeManager = new LocationDataMap(this);
+		this.getServer().getPluginManager()
+				.registerEvents(new LocationListener(LocationManagerPlugin.activeManager), this);
 	}
 
 	/**
@@ -61,11 +62,11 @@ public class LocationManagerPlugin extends CommonPlugin {
 
 	/**
 	 * Gets the currently active {@code LocationDataMap} for this plugin.
-	 * 
+	 *
 	 * @return the active {@code LocationDataMap}.
 	 */
 	public static LocationDataMap getLocationData() {
-		return activeManager;
+		return LocationManagerPlugin.activeManager;
 	}
 
 }

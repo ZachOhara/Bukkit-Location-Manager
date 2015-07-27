@@ -28,11 +28,10 @@ import org.bukkit.entity.Player;
 
 /**
  * The {@code LocationRequestHistory} class contains static fields and methods that keep
- * track of useages of the 'requestlocation' command. By design, whenever a player uses
- * the command 'telllocation' without any arguments, their location is sent to whichever
- * other player on the server sent the most recent request for the sending player's
- * location.
- * 
+ * track of useages of the 'requestlocation' command. By design, whenever a player uses the
+ * command 'telllocation' without any arguments, their location is sent to whichever other
+ * player on the server sent the most recent request for the sending player's location.
+ *
  * @author Zach Ohara.
  */
 public abstract class LocationRequestHistory {
@@ -46,42 +45,45 @@ public abstract class LocationRequestHistory {
 	/**
 	 * Registers a new instance of the 'requestlocation' command, and adds the UUID's of
 	 * the relevant players to the list.
-	 * 
+	 *
 	 * @param instance the {@code CommandInstance} of the command.
 	 */
 	public static void registerRequest(CommandInstance instance) {
-		registerRequest(instance.getSenderPlayer(), instance.getTargetPlayer());
+		LocationRequestHistory.registerRequest(instance.getSenderPlayer(), instance.getTargetPlayer());
 	}
 
 	/**
 	 * Registers a new instance of the 'requestlocation' command, and adds the UUID's of
 	 * the the two given players to the list.
-	 * 
+	 *
 	 * @param sender the player who sent the command.
 	 * @param target the player that was targeted by the command.
 	 */
 	public static void registerRequest(Player sender, Player target) {
-		for (int i = requestHistory.size() - 1; i >= 0; i--) {
-			if (Bukkit.getPlayer(requestHistory.get(i)[1]).equals(target))
-				requestHistory.remove(i);
+		for (int i = LocationRequestHistory.requestHistory.size() - 1; i >= 0; i--) {
+			if (Bukkit.getPlayer(LocationRequestHistory.requestHistory.get(i)[1]).equals(target)) {
+				LocationRequestHistory.requestHistory.remove(i);
+			}
 		}
 		UUID[] request = {sender.getUniqueId(), target.getUniqueId()};
-		requestHistory.add(request);
-		PlayerUtil.getAdmin().sendMessage("Registering request from " + sender.getName() + " to " + target.getName());
-		PlayerUtil.getAdmin().sendMessage("Length is now " + requestHistory.size());
+		LocationRequestHistory.requestHistory.add(request);
+		PlayerUtil.getAdmin().sendMessage(
+				"Registering request from " + sender.getName() + " to " + target.getName());
+		PlayerUtil.getAdmin().sendMessage("Length is now " + LocationRequestHistory.requestHistory.size());
 	}
 
 	/**
 	 * Finds the player who most recently send a location request to the given target.
-	 * 
+	 *
 	 * @param target the player to query as a recent target.
 	 * @return the player who most recently requested the location of the given target.
 	 */
 	public static Player getMostRecentRequest(Player target) {
-		for (int i = requestHistory.size() - 1; i >= 0; i--) {
-			UUID[] pair = requestHistory.get(i);
-			if (pair[1].equals(target.getUniqueId()))
+		for (int i = LocationRequestHistory.requestHistory.size() - 1; i >= 0; i--) {
+			UUID[] pair = LocationRequestHistory.requestHistory.get(i);
+			if (pair[1].equals(target.getUniqueId())) {
 				return Bukkit.getPlayer(pair[0]);
+			}
 		}
 		return null;
 	}

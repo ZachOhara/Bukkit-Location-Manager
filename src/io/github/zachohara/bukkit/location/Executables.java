@@ -16,9 +16,6 @@
 
 package io.github.zachohara.bukkit.location;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.Implementation;
@@ -26,36 +23,39 @@ import io.github.zachohara.bukkit.common.util.StringUtil;
 import io.github.zachohara.bukkit.location.data.LocationDataMap;
 import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 /**
  * The {@code Executables} interface represents the set of commands supported by this
  * plugin, and contains an executable object for each command that acts as the main
  * procedure for the command.
- * 
+ *
  * @author Zach Ohara
  */
 public enum Executables implements CommandExecutables {
-	
+
 	GET(new Get()),
 	REQUEST(new Request()),
 	TELL(new Tell()),
 	BROADCAST(new Broadcast()),
 	ME(new Me());
-	
+
 	/**
 	 * The subclass of {@code Implementation} that contains an implementation for the
 	 * command.
 	 */
 	private Implementation implement;
-	
+
 	/**
 	 * Constructs a new constant with the given implementation.
-	 * 
+	 *
 	 * @param implement the implementation of the command.
 	 */
 	private Executables(Implementation implement) {
 		this.implement = implement;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -63,12 +63,12 @@ public enum Executables implements CommandExecutables {
 	public Implementation getImplementation() {
 		return this.implement;
 	}
-	
+
 	/**
 	 * The implementation for the 'getlocation' command.
 	 */
 	private static class Get extends Implementation {
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -76,7 +76,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "getlocation";
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -88,20 +88,21 @@ public enum Executables implements CommandExecutables {
 			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
 				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
-				instance.sendMessage("%gt is not currently online!\nTheir last known location is " + locString);
+				instance.sendMessage("%gt is not currently online!\nTheir last known location is "
+						+ locString);
 			} else {
 				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
 			}
 			return true;
 		}
-		
+
 	}
-	
+
 	/**
 	 * The implementation for the 'requestlocation' command.
 	 */
 	private static class Request extends Implementation {
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -109,7 +110,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "requestlocation";
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -122,14 +123,14 @@ public enum Executables implements CommandExecutables {
 			LocationRequestHistory.registerRequest(instance);
 			return true;
 		}
-		
+
 	}
-	
+
 	/**
 	 * The implementation for the 'telllocation' command.
 	 */
 	private static class Tell extends Implementation {
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -137,7 +138,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "telllocation";
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -149,7 +150,8 @@ public enum Executables implements CommandExecutables {
 			} else {
 				Player returnTo = LocationRequestHistory.getMostRecentRequest(instance.getSenderPlayer());
 				if (returnTo != null) {
-					instance.sendMessage("@name " + returnTo.getName() + "@text has been informed of your location") ;
+					instance.sendMessage("@name " + returnTo.getName()
+							+ "@text has been informed of your location");
 					returnTo.sendMessage(StringUtil.parseString("%s is currently at %sloc", instance));
 				} else {
 					instance.sendError("No open requests were found");
@@ -157,14 +159,14 @@ public enum Executables implements CommandExecutables {
 			}
 			return true;
 		}
-		
+
 	}
-	
+
 	/**
 	 * The implementation for the 'broadcastlocation' command.
 	 */
 	private static class Broadcast extends Implementation {
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -172,27 +174,28 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "broadcastlocation";
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
-			if (instance.getArguments().length == 0)
+			if (instance.getArguments().length == 0) {
 				instance.broadcastMessage("%s is currently at position %sloc");
-			else if (instance.hasTarget()) {
+			} else if (instance.hasTarget()) {
 				instance.broadcastMessage("%t is currently at %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
 				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
-				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is " + locString);
-			}
-			else
+				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is "
+						+ locString);
+			} else {
 				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
+			}
 			return true;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -205,14 +208,14 @@ public enum Executables implements CommandExecutables {
 				return this.doPlayerCommand(instance);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * The implementation for the 'mylocation' command.
 	 */
 	private static class Me extends Implementation {
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -220,7 +223,7 @@ public enum Executables implements CommandExecutables {
 		public String getName() {
 			return "mylocation";
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -229,7 +232,7 @@ public enum Executables implements CommandExecutables {
 			instance.sendMessage("You are currently at %sloc");
 			return true;
 		}
-		
+
 	}
-	
+
 }

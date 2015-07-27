@@ -16,19 +16,19 @@
 
 package io.github.zachohara.bukkit.location.data;
 
+import io.github.zachohara.bukkit.common.persistence.PersistentPlayerData;
+import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+
 import java.io.Serializable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import io.github.zachohara.bukkit.common.persistence.PersistentPlayerData;
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
-
 /**
  * A {@code LocationDataMap} is a {@code PersistentPlayerData} map that stores the location
  * of every player when they join or leave the game.
- *  
+ *
  * @author Zach Ohara
  */
 public class LocationDataMap extends PersistentPlayerData<LocationDataMap.SerializableLocation> {
@@ -44,9 +44,9 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 	 * @param owner the {@code CommonPlugin} that owns this data map.
 	 */
 	public LocationDataMap(CommonPlugin owner) {
-		super(owner, FILENAME);
+		super(owner, LocationDataMap.FILENAME);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -54,7 +54,7 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 	public SerializableLocation calculateDataValue(Player key) {
 		return new SerializableLocation(key.getLocation());
 	}
-	
+
 	/**
 	 * Gets the {@code Location} of the specified {@code Player}.
 	 *
@@ -64,7 +64,7 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 	public Location retrievePlayerLocation(Player p) {
 		return this.getKeyData(p).getLocation();
 	}
-	
+
 	/**
 	 * Gets the {@code Location} of the {@code Player} with the specified name.
 	 *
@@ -78,8 +78,8 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 	/**
 	 * A {@code SerializableLocation} object stores the same information as a
 	 * {@code Location} object, but can be serialized if necessary. A
-	 * {@code SerializableLocation} object can translate itself between a
-	 * {@code Location} object an a {@code SerializableLocation} object.
+	 * {@code SerializableLocation} object can translate itself between a {@code Location}
+	 * object an a {@code SerializableLocation} object.
 	 */
 	public static class SerializableLocation implements Serializable {
 
@@ -117,7 +117,7 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 
 		/**
 		 * Constructs a new {@code SerializableLocation} out of the given {@code Location}.
-		 * 
+		 *
 		 * @param loc the {@code Location} to construct this object from.
 		 */
 		public SerializableLocation(Location loc) {
@@ -131,7 +131,7 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 
 		/**
 		 * Converts this {@code SerializableLocation} into a new {@code Location}
-		 * 
+		 *
 		 * @return a {@code Location} object represented by this
 		 * {@code SerializableLocation} object.
 		 */
