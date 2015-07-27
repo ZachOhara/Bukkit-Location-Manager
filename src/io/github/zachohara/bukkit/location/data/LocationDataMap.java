@@ -33,23 +33,46 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
  */
 public class LocationDataMap extends PersistentPlayerData<LocationDataMap.SerializableLocation> {
 
+	/**
+	 * The name of the file to store all location data to.
+	 */
 	public static final String FILENAME = "offline_player_locations.dat";
+
+	/**
+	 * Constructs a new {@code LocationDataMap} with the given plugin as an owner.
+	 *
+	 * @param owner the {@code CommonPlugin} that owns this data map.
+	 */
+	public LocationDataMap(CommonPlugin owner) {
+		super(owner, FILENAME);
+	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public SerializableLocation calculateDataValue(Player key) {
 		return new SerializableLocation(key.getLocation());
 	}
 	
+	/**
+	 * Gets the {@code Location} of the specified {@code Player}.
+	 *
+	 * @param p the {@code Player} to find the {@code Location} of.
+	 * @return the {@code Location} of the specified {@code Player}.
+	 */
 	public Location retrievePlayerLocation(Player p) {
 		return this.getKeyData(p).getLocation();
 	}
 	
+	/**
+	 * Gets the {@code Location} of the {@code Player} with the specified name.
+	 *
+	 * @param playername the name of the player to find the {@code Location} of.
+	 * @return the {@code Location} of the specified {@code Player}.
+	 */
 	public Location retrievePlayerLocation(String playername) {
 		return this.getKeyData(playername).getLocation();
-	}
-
-	public LocationDataMap(CommonPlugin owner) {
-		super(owner, FILENAME);
 	}
 
 	/**
