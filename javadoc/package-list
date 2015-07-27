@@ -1,3 +1,2 @@
-io.github.zachohara.bukkit.location.command
-io.github.zachohara.bukkit.location.locdata
-io.github.zachohara.bukkit.location.plugin
+io.github.zachohara.bukkit.location
+io.github.zachohara.bukkit.location.data
