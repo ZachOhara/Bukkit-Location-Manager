@@ -22,7 +22,7 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 import io.github.zachohara.bukkit.location.data.LocationDataMap;
 
 /**
- * The {@code Main} class is the entry point for plugin.
+ * The {@code LocationManagerPlugin} class is the entry point for plugin.
  *
  * @author Zach Ohara
  */
