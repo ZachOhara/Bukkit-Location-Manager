@@ -16,13 +16,10 @@
 
 package io.github.zachohara.bukkit.location.data;
 
-import io.github.zachohara.bukkit.common.persistence.PersistentPlayerData;
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.persistence.map.PersistentPlayerData;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
+import io.github.zachohara.bukkit.simpleplugin.serializable.SerializableLocation;
 
-import java.io.Serializable;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
@@ -31,7 +28,7 @@ import org.bukkit.entity.Player;
  *
  * @author Zach Ohara
  */
-public class LocationDataMap extends PersistentPlayerData<LocationDataMap.SerializableLocation> {
+public class LocationDataMap extends PersistentPlayerData<SerializableLocation> {
 
 	/**
 	 * The name of the file to store all location data to.
@@ -43,7 +40,7 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 	 *
 	 * @param owner the {@code CommonPlugin} that owns this data map.
 	 */
-	public LocationDataMap(CommonPlugin owner) {
+	public LocationDataMap(SimplePlugin owner) {
 		super(owner, LocationDataMap.FILENAME);
 	}
 
@@ -55,90 +52,90 @@ public class LocationDataMap extends PersistentPlayerData<LocationDataMap.Serial
 		return new SerializableLocation(key.getLocation());
 	}
 
-	/**
-	 * Gets the {@code Location} of the specified {@code Player}.
-	 *
-	 * @param p the {@code Player} to find the {@code Location} of.
-	 * @return the {@code Location} of the specified {@code Player}.
-	 */
-	public Location retrievePlayerLocation(Player p) {
-		return this.getKeyData(p).getLocation();
-	}
-
-	/**
-	 * Gets the {@code Location} of the {@code Player} with the specified name.
-	 *
-	 * @param playername the name of the player to find the {@code Location} of.
-	 * @return the {@code Location} of the specified {@code Player}.
-	 */
-	public Location retrievePlayerLocation(String playername) {
-		return this.getKeyData(playername).getLocation();
-	}
-
-	/**
-	 * A {@code SerializableLocation} object stores the same information as a
-	 * {@code Location} object, but can be serialized if necessary. A
-	 * {@code SerializableLocation} object can translate itself between a {@code Location}
-	 * object an a {@code SerializableLocation} object.
-	 */
-	public static class SerializableLocation implements Serializable {
-
-		/**
-		 * The name of the world that the location is in.
-		 */
-		String worldName;
-
-		/**
-		 * The x-coordinate of the location.
-		 */
-		double x;
-
-		/**
-		 * The y-coordinate of the location.
-		 */
-		double y;
-
-		/**
-		 * The z-coordinate of the location.
-		 */
-		double z;
-
-		/**
-		 * The yaw of the location.
-		 */
-		float yaw;
-
-		/**
-		 * The pitch of the location.
-		 */
-		float pitch;
-
-		private static final long serialVersionUID = 1L;
-
-		/**
-		 * Constructs a new {@code SerializableLocation} out of the given {@code Location}.
-		 *
-		 * @param loc the {@code Location} to construct this object from.
-		 */
-		public SerializableLocation(Location loc) {
-			this.worldName = loc.getWorld().getName();
-			this.x = loc.getX();
-			this.y = loc.getY();
-			this.z = loc.getZ();
-			this.yaw = loc.getYaw();
-			this.pitch = loc.getPitch();
-		}
-
-		/**
-		 * Converts this {@code SerializableLocation} into a new {@code Location}
-		 *
-		 * @return a {@code Location} object represented by this
-		 * {@code SerializableLocation} object.
-		 */
-		public Location getLocation() {
-			return new Location(Bukkit.getWorld(this.worldName), this.x, this.y, this.z, this.yaw, this.pitch);
-		}
-
-	}
+//	/**
+//	 * Gets the {@code Location} of the specified {@code Player}.
+//	 *
+//	 * @param p the {@code Player} to find the {@code Location} of.
+//	 * @return the {@code Location} of the specified {@code Player}.
+//	 */
+//	public Location retrievePlayerLocation(Player p) {
+//		return this.getKeyData(p).getLocation();
+//	}
+//
+//	/**
+//	 * Gets the {@code Location} of the {@code Player} with the specified name.
+//	 *
+//	 * @param playername the name of the player to find the {@code Location} of.
+//	 * @return the {@code Location} of the specified {@code Player}.
+//	 */
+//	public Location retrievePlayerLocation(String playername) {
+//		return this.getKeyData(playername).getLocation();
+//	}
+//
+//	/**
+//	 * A {@code SerializableLocation} object stores the same information as a
+//	 * {@code Location} object, but can be serialized if necessary. A
+//	 * {@code SerializableLocation} object can translate itself between a {@code Location}
+//	 * object an a {@code SerializableLocation} object.
+//	 */
+//	public static class SerializableLocation implements Serializable {
+//
+//		/**
+//		 * The name of the world that the location is in.
+//		 */
+//		String worldName;
+//
+//		/**
+//		 * The x-coordinate of the location.
+//		 */
+//		double x;
+//
+//		/**
+//		 * The y-coordinate of the location.
+//		 */
+//		double y;
+//
+//		/**
+//		 * The z-coordinate of the location.
+//		 */
+//		double z;
+//
+//		/**
+//		 * The yaw of the location.
+//		 */
+//		float yaw;
+//
+//		/**
+//		 * The pitch of the location.
+//		 */
+//		float pitch;
+//
+//		private static final long serialVersionUID = 1L;
+//
+//		/**
+//		 * Constructs a new {@code SerializableLocation} out of the given {@code Location}.
+//		 *
+//		 * @param loc the {@code Location} to construct this object from.
+//		 */
+//		public SerializableLocation(Location loc) {
+//			this.worldName = loc.getWorld().getName();
+//			this.x = loc.getX();
+//			this.y = loc.getY();
+//			this.z = loc.getZ();
+//			this.yaw = loc.getYaw();
+//			this.pitch = loc.getPitch();
+//		}
+//
+//		/**
+//		 * Converts this {@code SerializableLocation} into a new {@code Location}
+//		 *
+//		 * @return a {@code Location} object represented by this
+//		 * {@code SerializableLocation} object.
+//		 */
+//		public Location getLocation() {
+//			return new Location(Bukkit.getWorld(this.worldName), this.x, this.y, this.z, this.yaw, this.pitch);
+//		}
+//
+//	}
 
 }

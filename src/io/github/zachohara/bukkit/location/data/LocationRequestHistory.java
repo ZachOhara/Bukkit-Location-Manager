@@ -16,8 +16,7 @@
 
 package io.github.zachohara.bukkit.location.data;
 
-import io.github.zachohara.bukkit.common.command.CommandInstance;
-import io.github.zachohara.bukkit.common.util.PlayerUtil;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -67,9 +66,6 @@ public abstract class LocationRequestHistory {
 		}
 		UUID[] request = {sender.getUniqueId(), target.getUniqueId()};
 		LocationRequestHistory.requestHistory.add(request);
-		PlayerUtil.getAdmin().sendMessage(
-				"Registering request from " + sender.getName() + " to " + target.getName());
-		PlayerUtil.getAdmin().sendMessage("Length is now " + LocationRequestHistory.requestHistory.size());
 	}
 
 	/**

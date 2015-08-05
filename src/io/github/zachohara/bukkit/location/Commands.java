@@ -16,52 +16,54 @@
 
 package io.github.zachohara.bukkit.location;
 
-import io.github.zachohara.bukkit.common.command.CommandExecutables;
-import io.github.zachohara.bukkit.common.command.CommandInstance;
-import io.github.zachohara.bukkit.common.command.Implementation;
-import io.github.zachohara.bukkit.common.util.StringUtil;
-import io.github.zachohara.bukkit.location.data.LocationDataMap;
-import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import io.github.zachohara.bukkit.location.data.LocationDataMap;
+import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
+import io.github.zachohara.bukkit.simpleplugin.command.Implementation;
+import io.github.zachohara.bukkit.simpleplugin.command.Properties;
+import io.github.zachohara.bukkit.simpleplugin.command.Properties.Source;
+import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
+import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
+
 /**
- * The {@code Executables} interface represents the set of commands supported by this
- * plugin, and contains an executable object for each command that acts as the main
- * procedure for the command.
+ * The {@code Rules} interface represents the set of commands supported by this plugin, and
+ * contains a {@code CommandRulesEntry} for each command, which defines information about
+ * the expected context of the command.
  *
  * @author Zach Ohara
  */
-public enum Executables implements CommandExecutables {
+public enum Commands implements CommandSet {
 
-	GET(new Get()),
-	REQUEST(new Request()),
-	TELL(new Tell()),
-	BROADCAST(new Broadcast()),
-	ME(new Me());
-
+	GET(new Properties(1, 1, Source.OP_ONLY, Target.ALLOW_OFFLINE, new Get())),
+	REQUEST(new Properties(1, 1, Source.ALL, Target.ALL_ONLINE, new Request())),
+	TELL(new Properties(0, 1, Source.PLAYER_ONLY, Target.ALL_ONLINE, new Tell())),
+	BROADCAST(new Properties(0, 1, Source.ALL, Target.ALLOW_OFFLINE, new Broadcast())),
+	ME(new Properties(0, 0, Source.PLAYER_ONLY, Target.NONE, new Me()));
+	
 	/**
-	 * The subclass of {@code Implementation} that contains an implementation for the
-	 * command.
+	 * The {@code Properties} object specific to a single command.
 	 */
-	private Implementation implement;
-
+	private Properties properties;
+	
 	/**
-	 * Constructs a new constant with the given implementation.
+	 * Constructs a new {@code Commands} with the given {@code Properties} for this command. 
 	 *
-	 * @param implement the implementation of the command.
+	 * @param p the {@code Properties} for this command.
 	 */
-	private Executables(Implementation implement) {
-		this.implement = implement;
+	private Commands(Properties p) {
+		this.properties = p;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Implementation getImplementation() {
-		return this.implement;
+	public Properties getProperties() {
+		return this.properties;
 	}
 
 	/**
@@ -73,20 +75,12 @@ public enum Executables implements CommandExecutables {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public String getName() {
-			return "getlocation";
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
 			if (instance.hasTarget()) {
 				instance.sendMessage("%t is at position %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
-				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
+				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is "
 						+ locString);
@@ -107,14 +101,6 @@ public enum Executables implements CommandExecutables {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public String getName() {
-			return "requestlocation";
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("%t has been informed of your request\n"
 					+ "%t may now send you their location");
@@ -130,14 +116,6 @@ public enum Executables implements CommandExecutables {
 	 * The implementation for the 'telllocation' command.
 	 */
 	private static class Tell extends Implementation {
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getName() {
-			return "telllocation";
-		}
 
 		/**
 		 * {@inheritDoc}
@@ -171,14 +149,6 @@ public enum Executables implements CommandExecutables {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public String getName() {
-			return "broadcastlocation";
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
 			if (instance.getArguments().length == 0) {
@@ -186,7 +156,7 @@ public enum Executables implements CommandExecutables {
 			} else if (instance.hasTarget()) {
 				instance.broadcastMessage("%t is currently at %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
-				Location targetLoc = activeManager.retrievePlayerLocation(instance.getGivenTarget());
+				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is "
 						+ locString);
@@ -215,14 +185,6 @@ public enum Executables implements CommandExecutables {
 	 * The implementation for the 'mylocation' command.
 	 */
 	private static class Me extends Implementation {
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getName() {
-			return "mylocation";
-		}
 
 		/**
 		 * {@inheritDoc}

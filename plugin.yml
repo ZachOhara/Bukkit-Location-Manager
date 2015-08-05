@@ -1,7 +1,7 @@
 name: LocationManager
-version: 2.4.2
+version: 3.0-pre0
 main: io.github.zachohara.bukkit.location.LocationManagerPlugin
-depend: [BukkitCommon]
+depend: [SimplePlugin]
 prefix: Location Manager
 description: Location management tools
 author: Zach Ohara

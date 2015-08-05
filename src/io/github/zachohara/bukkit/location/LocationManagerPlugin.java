@@ -16,17 +16,16 @@
 
 package io.github.zachohara.bukkit.location;
 
-import io.github.zachohara.bukkit.common.command.CommandExecutables;
-import io.github.zachohara.bukkit.common.command.CommandRules;
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 import io.github.zachohara.bukkit.location.data.LocationDataMap;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * The {@code LocationManagerPlugin} class is the entry point for plugin.
  *
  * @author Zach Ohara
  */
-public class LocationManagerPlugin extends CommonPlugin {
+public class LocationManagerPlugin extends SimplePlugin {
 
 	/**
 	 * The current {@code LocationDataMap} for this plugin.
@@ -45,28 +44,20 @@ public class LocationManagerPlugin extends CommonPlugin {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Class<? extends CommandRules> getCommandRuleSet() {
-		return Rules.class;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Class<? extends CommandExecutables> getCommandExecutableSet() {
-		return Executables.class;
-	}
-
-	/**
 	 * Gets the currently active {@code LocationDataMap} for this plugin.
 	 *
 	 * @return the active {@code LocationDataMap}.
 	 */
 	public static LocationDataMap getLocationData() {
 		return LocationManagerPlugin.activeManager;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Class<? extends CommandSet> getCommandSet() {
+		return Commands.class;
 	}
 
 }
