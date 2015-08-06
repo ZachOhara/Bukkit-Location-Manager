@@ -30,19 +30,19 @@ import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
 import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
 /**
- * The {@code Rules} interface represents the set of commands supported by this plugin, and
- * contains a {@code CommandRulesEntry} for each command, which defines information about
- * the expected context of the command.
+ * The {@code Commands} interface represents the set of commands supported by this plugin, and
+ * contains a {@code Properties} object for each command.
  *
  * @author Zach Ohara
+ * @see Properties
  */
 public enum Commands implements CommandSet {
 
-	GET(new Properties(1, 1, Source.OP_ONLY, Target.ALLOW_OFFLINE, new Get())),
-	REQUEST(new Properties(1, 1, Source.ALL, Target.ALL_ONLINE, new Request())),
-	TELL(new Properties(0, 1, Source.PLAYER_ONLY, Target.ALL_ONLINE, new Tell())),
-	BROADCAST(new Properties(0, 1, Source.ALL, Target.ALLOW_OFFLINE, new Broadcast())),
-	ME(new Properties(0, 0, Source.PLAYER_ONLY, Target.NONE, new Me()));
+	GETLOCATION(new Properties(1, 1, Source.OP_ONLY, Target.ALLOW_OFFLINE, new Get())),
+	REQUESTLOCATION(new Properties(1, 1, Source.ALL, Target.ALL_ONLINE, new Request())),
+	TELLLOCATION(new Properties(0, 1, Source.PLAYER_ONLY, Target.ALL_ONLINE, new Tell())),
+	BROADCASTLOCATION(new Properties(0, 1, Source.ALL, Target.ALLOW_OFFLINE, new Broadcast())),
+	MYLOCATION(new Properties(0, 0, Source.PLAYER_ONLY, Target.NONE, new Me()));
 	
 	/**
 	 * The {@code Properties} object specific to a single command.
@@ -79,7 +79,7 @@ public enum Commands implements CommandSet {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
 			if (instance.hasTarget()) {
 				instance.sendMessage("%t is at position %tloc");
-			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
+			} else if (activeManager.keyDataExists(instance.getGivenTarget().toLowerCase())) {
 				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is "
@@ -155,7 +155,7 @@ public enum Commands implements CommandSet {
 				instance.broadcastMessage("%s is currently at position %sloc");
 			} else if (instance.hasTarget()) {
 				instance.broadcastMessage("%t is currently at %tloc");
-			} else if (activeManager.keyDataExists(instance.getGivenTarget())) {
+			} else if (activeManager.keyDataExists(instance.getGivenTarget().toLowerCase())) {
 				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
 				String locString = StringUtil.getLocationString(targetLoc);
 				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is "
