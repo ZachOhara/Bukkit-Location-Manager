@@ -30,7 +30,7 @@ public class LocationManagerPlugin extends SimplePlugin {
 	/**
 	 * The current {@code LocationDataMap} for this plugin.
 	 */
-	private static LocationDataMap activeManager;
+	private static LocationDataMap activeDataMap;
 
 	/**
 	 * {@inheritDoc}
@@ -38,9 +38,9 @@ public class LocationManagerPlugin extends SimplePlugin {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-		LocationManagerPlugin.activeManager = new LocationDataMap(this);
-		this.getServer().getPluginManager()
-				.registerEvents(new LocationListener(LocationManagerPlugin.activeManager), this);
+		LocationManagerPlugin.activeDataMap = new LocationDataMap(this);
+		this.getServer().getPluginManager().registerEvents(
+				new LocationListener(LocationManagerPlugin.activeDataMap), this);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class LocationManagerPlugin extends SimplePlugin {
 	 * @return the active {@code LocationDataMap}.
 	 */
 	public static LocationDataMap getLocationData() {
-		return LocationManagerPlugin.activeManager;
+		return LocationManagerPlugin.activeDataMap;
 	}
 
 	/**

@@ -36,20 +36,20 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class LocationListener implements Listener {
 
 	/**
-	 * The {@code LocationDataManager} that all events should be reported to.
+	 * The {@code LocationDataMap} that all events should be reported to.
 	 *
 	 * @see LocationDataMap
 	 */
-	private LocationDataMap manager;
+	private LocationDataMap dataMap;
 
 	/**
 	 * Constructs a new Listener that will report actions to the given
-	 * {@code LocationDataManager}.
+	 * {@code LocationDataMap}.
 	 *
-	 * @param manager the {@code LocationDataManager} to report actions to.
+	 * @param manager the {@code LocationDataMap} to report actions to.
 	 */
 	public LocationListener(LocationDataMap manager) {
-		this.manager = manager;
+		this.dataMap = manager;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		this.manager.saveKeyedData(e.getPlayer());
+		this.dataMap.saveKeyedData(e.getPlayer());
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		this.manager.saveKeyedData(e.getPlayer());
+		this.dataMap.saveKeyedData(e.getPlayer());
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class LocationListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerKick(PlayerKickEvent e) {
-		this.manager.saveKeyedData(e.getPlayer());
+		this.dataMap.saveKeyedData(e.getPlayer());
 	}
 
 }
