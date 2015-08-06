@@ -39,8 +39,10 @@ public class LocationManagerPlugin extends SimplePlugin {
 	public void onEnable() {
 		super.onEnable();
 		LocationManagerPlugin.activeDataMap = new LocationDataMap(this);
+		// @formatter:off
 		this.getServer().getPluginManager().registerEvents(
 				new LocationListener(LocationManagerPlugin.activeDataMap), this);
+		// @formatter:on
 	}
 
 	/**

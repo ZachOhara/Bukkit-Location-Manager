@@ -16,9 +16,6 @@
 
 package io.github.zachohara.bukkit.location;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
 import io.github.zachohara.bukkit.location.data.LocationDataMap;
 import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
@@ -29,9 +26,12 @@ import io.github.zachohara.bukkit.simpleplugin.command.Properties.Source;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
 import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 /**
- * The {@code Commands} interface represents the set of commands supported by this plugin, and
- * contains a {@code Properties} object for each command.
+ * The {@code Commands} interface represents the set of commands supported by this plugin,
+ * and contains a {@code Properties} object for each command.
  *
  * @author Zach Ohara
  * @see Properties
@@ -43,14 +43,15 @@ public enum Commands implements CommandSet {
 	TELLLOCATION(new Properties(0, 1, Source.PLAYER_ONLY, Target.ALL_ONLINE, new Tell())),
 	BROADCASTLOCATION(new Properties(0, 1, Source.ALL, Target.ALLOW_OFFLINE, new Broadcast())),
 	MYLOCATION(new Properties(0, 0, Source.PLAYER_ONLY, Target.NONE, new Me()));
-	
+
 	/**
 	 * The {@code Properties} object specific to a single command.
 	 */
 	private Properties properties;
-	
+
 	/**
-	 * Constructs a new {@code Commands} with the given {@code Properties} for this command. 
+	 * Constructs a new {@code Commands} with the given {@code Properties} for this
+	 * command.
 	 *
 	 * @param p the {@code Properties} for this command.
 	 */
