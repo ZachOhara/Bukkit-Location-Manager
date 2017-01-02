@@ -24,6 +24,7 @@ import io.github.zachohara.bukkit.simpleplugin.command.Implementation;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Source;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
+import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
 import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
 import org.bukkit.Location;
@@ -82,7 +83,7 @@ public enum Commands implements CommandSet {
 				instance.sendMessage("%t is at position %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget().toLowerCase())) {
 				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
-				String locString = StringUtil.getLocationString(targetLoc);
+				String locString = StringParser.getLocationString(targetLoc);
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is "
 						+ locString);
 			} else {
@@ -131,7 +132,7 @@ public enum Commands implements CommandSet {
 				if (returnTo != null) {
 					instance.sendMessage("@name " + returnTo.getName()
 							+ "@text has been informed of your location");
-					returnTo.sendMessage(StringUtil.parseString("%s is currently at %sloc", instance));
+					returnTo.sendMessage(StringParser.parseString("%s is currently at %sloc", instance));
 				} else {
 					instance.sendError("No open requests were found");
 				}
@@ -158,7 +159,7 @@ public enum Commands implements CommandSet {
 				instance.broadcastMessage("%t is currently at %tloc");
 			} else if (activeManager.keyDataExists(instance.getGivenTarget().toLowerCase())) {
 				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
-				String locString = StringUtil.getLocationString(targetLoc);
+				String locString = StringParser.getLocationString(targetLoc);
 				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is "
 						+ locString);
 			} else {
