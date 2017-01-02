@@ -16,14 +16,14 @@
 
 package io.github.zachohara.bukkit.location;
 
-import io.github.zachohara.bukkit.location.data.LocationDataMap;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import io.github.zachohara.bukkit.location.data.LocationDataMap;
 
 /**
  * A {@code LocationListener} is a {@code Listener} that will listen for events concerning

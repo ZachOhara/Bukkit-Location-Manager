@@ -16,11 +16,11 @@
 
 package io.github.zachohara.bukkit.location.data;
 
+import org.bukkit.entity.Player;
+
 import io.github.zachohara.bukkit.simpleplugin.persistence.map.PersistentPlayerData;
 import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 import io.github.zachohara.bukkit.simpleplugin.serializable.SerializableLocation;
-
-import org.bukkit.entity.Player;
 
 /**
  * A {@code LocationDataMap} is a {@code PersistentPlayerData} map that stores the location

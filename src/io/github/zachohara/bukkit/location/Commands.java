@@ -16,6 +16,9 @@
 
 package io.github.zachohara.bukkit.location;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
 import io.github.zachohara.bukkit.location.data.LocationDataMap;
 import io.github.zachohara.bukkit.location.data.LocationRequestHistory;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
@@ -26,9 +29,6 @@ import io.github.zachohara.bukkit.simpleplugin.command.Properties.Source;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
 import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
 import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 /**
  * The {@code Commands} interface represents the set of commands supported by this plugin,
@@ -116,11 +116,13 @@ public enum Commands implements CommandSet {
 				instance.sendTargetMessage("%s is currently at %sloc");
 				instance.sendMessage("%t has been informed of your location");
 			} else {
-				Player returnTo = LocationRequestHistory.getMostRecentRequest(instance.getSenderPlayer());
+				Player returnTo =
+						LocationRequestHistory.getMostRecentRequest(instance.getSenderPlayer());
 				if (returnTo != null) {
 					instance.sendMessage("@name " + returnTo.getName()
 							+ "@text has been informed of your location");
-					returnTo.sendMessage(StringParser.parseString("%s is currently at %sloc", instance));
+					returnTo.sendMessage(
+							StringParser.parseString("%s is currently at %sloc", instance));
 				} else {
 					instance.sendError("No open requests were found");
 				}
@@ -145,8 +147,9 @@ public enum Commands implements CommandSet {
 			} else if (activeManager.keyDataExists(instance.getGivenTarget().toLowerCase())) {
 				Location targetLoc = activeManager.getKeyData(instance.getGivenTarget());
 				String locString = StringParser.getLocationString(targetLoc);
-				instance.broadcastMessage("%gt is not currently online!\nTheir last known location is "
-						+ locString);
+				instance.broadcastMessage(
+						"%gt is not currently online!\nTheir last known location is "
+								+ locString);
 			} else {
 				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
 			}

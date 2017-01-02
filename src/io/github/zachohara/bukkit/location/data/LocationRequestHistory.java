@@ -16,14 +16,14 @@
 
 package io.github.zachohara.bukkit.location.data;
 
-import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 
 /**
  * The {@code LocationRequestHistory} class contains static fields and methods that keep
@@ -48,7 +48,8 @@ public abstract class LocationRequestHistory {
 	 * @param instance the {@code CommandInstance} of the command.
 	 */
 	public static void registerRequest(CommandInstance instance) {
-		LocationRequestHistory.registerRequest(instance.getSenderPlayer(), instance.getTargetPlayer());
+		LocationRequestHistory.registerRequest(instance.getSenderPlayer(),
+				instance.getTargetPlayer());
 	}
 
 	/**
@@ -64,7 +65,9 @@ public abstract class LocationRequestHistory {
 				LocationRequestHistory.requestHistory.remove(i);
 			}
 		}
-		UUID[] request = {sender.getUniqueId(), target.getUniqueId()};
+		UUID[] request = {
+			sender.getUniqueId(), target.getUniqueId()
+		};
 		LocationRequestHistory.requestHistory.add(request);
 	}
 
