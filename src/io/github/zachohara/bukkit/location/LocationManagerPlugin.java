@@ -32,9 +32,6 @@ public class LocationManagerPlugin extends SimplePlugin {
 	 */
 	private static LocationDataMap activeDataMap;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void onEnable() {
 		super.onEnable();
@@ -54,9 +51,6 @@ public class LocationManagerPlugin extends SimplePlugin {
 		return LocationManagerPlugin.activeDataMap;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Class<? extends CommandSet> getCommandSet() {
 		return Commands.class;

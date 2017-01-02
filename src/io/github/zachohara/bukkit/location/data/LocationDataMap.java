@@ -44,9 +44,6 @@ public class LocationDataMap extends PersistentPlayerData<SerializableLocation> 
 		super(owner, LocationDataMap.FILENAME);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public SerializableLocation calculateDataValue(Player key) {
 		return new SerializableLocation(key.getLocation());

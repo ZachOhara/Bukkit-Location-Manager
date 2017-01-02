@@ -60,9 +60,6 @@ public enum Commands implements CommandSet {
 		this.properties = p;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Properties getProperties() {
 		return this.properties;
@@ -73,9 +70,6 @@ public enum Commands implements CommandSet {
 	 */
 	private static class Get extends Implementation {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
@@ -99,9 +93,6 @@ public enum Commands implements CommandSet {
 	 */
 	private static class Request extends Implementation {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("%t has been informed of your request\n"
@@ -119,9 +110,6 @@ public enum Commands implements CommandSet {
 	 */
 	private static class Tell extends Implementation {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			if (instance.hasTarget()) {
@@ -147,9 +135,6 @@ public enum Commands implements CommandSet {
 	 */
 	private static class Broadcast extends Implementation {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			LocationDataMap activeManager = LocationManagerPlugin.getLocationData();
@@ -168,9 +153,6 @@ public enum Commands implements CommandSet {
 			return true;
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doConsoleCommand(CommandInstance instance) {
 			if (instance.getArguments().length == 0) {
@@ -188,9 +170,6 @@ public enum Commands implements CommandSet {
 	 */
 	private static class Me extends Implementation {
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public boolean doPlayerCommand(CommandInstance instance) {
 			instance.sendMessage("You are currently at %sloc");
