@@ -1,5 +1,5 @@
 name: LocationManager
-version: 3.0
+version: 3.0.1
 main: io.github.zachohara.bukkit.location.LocationManagerPlugin
 depend: [SimplePlugin]
 prefix: Location Manager
