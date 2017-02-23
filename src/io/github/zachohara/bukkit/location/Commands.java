@@ -28,7 +28,7 @@ import io.github.zachohara.bukkit.simpleplugin.command.Properties;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Source;
 import io.github.zachohara.bukkit.simpleplugin.command.Properties.Target;
 import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
-import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.StandardString;
 
 /**
  * The {@code Commands} interface represents the set of commands supported by this plugin,
@@ -81,7 +81,7 @@ public enum Commands implements CommandSet {
 				instance.sendMessage("%gt is not currently online!\nTheir last known location is "
 						+ locString);
 			} else {
-				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
+				instance.sendError(StandardString.ERROR_TARGET_DNE_MESSAGE);
 			}
 			return true;
 		}
@@ -122,7 +122,7 @@ public enum Commands implements CommandSet {
 					instance.sendMessage("@name " + returnTo.getName()
 							+ "@text has been informed of your location");
 					returnTo.sendMessage(
-							StringParser.parseString("%s is currently at %sloc", instance));
+							StringParser.parseMessage("%s is currently at %sloc", instance));
 				} else {
 					instance.sendError("No open requests were found");
 				}
@@ -151,7 +151,7 @@ public enum Commands implements CommandSet {
 						"%gt is not currently online!\nTheir last known location is "
 								+ locString);
 			} else {
-				instance.sendError(StringUtil.ERROR_TARGET_DNE_MESSAGE);
+				instance.sendError(StandardString.ERROR_TARGET_DNE_MESSAGE);
 			}
 			return true;
 		}

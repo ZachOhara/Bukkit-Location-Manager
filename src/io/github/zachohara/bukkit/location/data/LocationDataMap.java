@@ -16,9 +16,11 @@
 
 package io.github.zachohara.bukkit.location.data;
 
+import java.io.IOException;
+
 import org.bukkit.entity.Player;
 
-import io.github.zachohara.bukkit.simpleplugin.persistence.map.PersistentPlayerData;
+import io.github.zachohara.bukkit.simpleplugin.fileio.persistence.PersistentPlayerData;
 import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 import io.github.zachohara.bukkit.simpleplugin.serializable.SerializableLocation;
 
@@ -42,11 +44,18 @@ public class LocationDataMap extends PersistentPlayerData<SerializableLocation> 
 	 */
 	public LocationDataMap(SimplePlugin owner) {
 		super(owner, LocationDataMap.FILENAME);
+		this.saveAllPlayerData();
 	}
 
 	@Override
 	public SerializableLocation calculateDataValue(Player key) {
 		return new SerializableLocation(key.getLocation());
+	}
+	
+	@Override
+	protected void attemptClose() throws IOException {
+		this.saveAllPlayerData();
+		super.attemptClose();
 	}
 
 }
